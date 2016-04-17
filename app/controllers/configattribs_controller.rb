@@ -12,22 +12,26 @@ class ConfigattribsController < ApplicationController
   # GET /configattribs/1
   # GET /configattribs/1.json
   def show
+    redirect_to configattribs_path
   end
 
   # GET /configattribs/new
   def new
     @configattrib = Configattrib.new
+    @configattrib.configdb_id = params[:id]
+    @configdb = Configdb.find(params[:id])
   end
 
   # GET /configattribs/1/edit
   def edit
+    configdb_id = Configattrib.find(params[:id]).configdb_id
+    @configdb = Configdb.find(configdb_id)
   end
 
   # POST /configattribs
   # POST /configattribs.json
   def create
     @configattrib = Configattrib.new(configattrib_params)
-
     respond_to do |format|
       if @configattrib.save
         format.html { redirect_to @configattrib, notice: 'Configattrib was successfully created.' }

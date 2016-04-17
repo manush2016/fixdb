@@ -10,15 +10,21 @@ class ConfigattribdetailsController < ApplicationController
   # GET /configattribdetails/1
   # GET /configattribdetails/1.json
   def show
+    redirect_to configattribs_path
   end
 
   # GET /configattribdetails/new
   def new
     @configattribdetail = Configattribdetail.new
+    @configattribdetail.configattrib_id = params[:id]
+    @configattrib=Configattrib.find(params[:id])
   end
 
   # GET /configattribdetails/1/edit
   def edit
+    configattrib_id = Configattribdetail.find(params[:id]).configattrib_id
+    @configattrib = Configattrib.find(configattrib_id)
+
   end
 
   # POST /configattribdetails

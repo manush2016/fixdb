@@ -1,53 +1,18 @@
 <%= form_for(@configattrib) do |f| %>
-  <% if @configattrib.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@configattrib.errors.count, "error") %> prohibited this configattrib from being saved:</h2>
-
-      <ul>
-      <% @configattrib.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :configdb_id %><br>
-    <%= f.text_field :configdb_id %>
-  </div>
-  <div class="field">
-    <%= f.label :attribute_name %><br>
-    <%= f.text_field :attribute_name %>
-  </div>
-  <div class="field">
-    <%= f.label :monitor %><br>
-    <%= f.text_field :monitor %>
-  </div>
-  <div class="field">
-    <%= f.label :th_warning %><br>
-    <%= f.text_field :th_warning %>
-  </div>
-  <div class="field">
-    <%= f.label :th_critical %><br>
-    <%= f.text_field :th_critical %>
-  </div>
-  <div class="field">
-    <%= f.label :command %><br>
-    <%= f.text_area :command %>
-  </div>
-  <div class="field">
-    <%= f.label :command_operand %><br>
-    <%= f.text_field :command_operand %>
-  </div>
-  <div class="field">
-    <%= f.label :command_operator %><br>
-    <%= f.text_field :command_operator %>
-  </div>
-  <div class="field">
-    <%= f.label :command_file_type %><br>
-    <%= f.text_field :command_file_type %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <table>
+    <tr><td><%= f.label :configdb_id %></td><td><%=  f.text_field :configdb_id %></td></tr>
+    <tr><td><%= f.label :Location %></td><td><%=  @configdb.location %></td></tr>
+    <tr><td><%= f.label :attribute_name %></td><td><%= f.text_field :attribute_name %></td></tr>
+    <tr><td><%= f.label :monitor %></td><td><%= f.check_box :monitor, {}, 'Y', 'N' %></td></tr>
+    <tr><td><%= f.label :th_warning %></td><td><%= f.text_field :th_warning %></td></tr>
+    <tr><td><%= f.label :th_critical %></td><td><%= f.text_field :th_critical %></td></tr>
+    <tr><td><%= f.label :command %></td><td><%= f.text_area :command %></td></tr>
+    <tr><td><%= f.label :command_operand %></td><td><%= f.text_field :command_operand %></td></tr>
+    <tr><td><%= f.label :command_operator %></td><td><%= f.text_field :command_operator %></td></tr>
+    <tr><td><%= f.label :command_file_type %></td><td> <%= f.radio_button :command_file_type, 'DB', :checked => true %> DB
+        <%= f.radio_button :command_file_type, 'OS' %> OS
+    <tr><td><%= f.submit %></td></tr>
+  </table>
 <% end %>
+
+

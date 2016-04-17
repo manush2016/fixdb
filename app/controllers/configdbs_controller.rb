@@ -10,6 +10,7 @@ class ConfigdbsController < ApplicationController
   # GET /configdbs/1
   # GET /configdbs/1.json
   def show
+    redirect_to configattribs_path
   end
 
   # GET /configdbs/new
