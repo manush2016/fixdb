@@ -1,0 +1,79 @@
+
+<h1>Configuration of Attributes</h1>
+
+<div class="acidjs-css3-treeview">
+  <ul>
+    <% i=0 %>
+    <% @configdbs.each do |configdb| %>
+      <li><input type="checkbox" id="node-<%= i %>" /><label><input type="checkbox" <%= (configdb.monitor=="Y")  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>"><%= link_to configdb.location.upcase, edit_configdb_path(:id => configdb.id) %></label>
+        <ul>
+          <% j=0 %>
+          <li><input type="checkbox" id="node-<%= i %>-<%= j %>" /><label><input type="checkbox" unchecked disabled style="display:none;"/><span></span></label><label for="node-<%= i %>-<%= j %>"><%= link_to "NEW", new_configattrib_path(:id => configdb.id) %></label></li>
+          <% j+=1 %>
+          <% Configattrib.where("configdb_id=?",configdb.id).each do |configattrib| %>
+            <li><input type="checkbox" id="node-<%= i %>-<%= j %>" /><label><input type="checkbox" <%= (configattrib.monitor=="Y")  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>-<%= j %>"><%= link_to configattrib.attribute_name, edit_configattrib_path(:id => configattrib.id) %></label>
+              <ul>
+                <% k=0 %>
+                <li><input type="checkbox" id="node-<%= i %>-<%= j %>-<%= k %>" /><label><input type="checkbox" unchecked disabled style="display:none;"/><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><%= link_to "NEW", new_configattribdetail_path(:id => configattrib.id) %></label></li>
+                <% k+=1 %>
+                <% Configattribdetail.where("configattrib_id=?",configattrib.id).each do |configattribdetail| %>
+                <li><label><input type="checkbox" <%= (Configattribexcl.where("configattribdetail_id=?",configattribdetail.id).pluck(:excludemonitor)[0]=="Y")  ? "unchecked" : "checked" %> /><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><%= link_to configattribdetail.param1, edit_configattribdetail_path(:id => configattribdetail.id)  %></label></li>
+                <% k+=1 %>
+                <% end %>
+              </ul>
+              <% j+=1 %>
+            </li>
+          <% end %>
+        </ul>
+        <% i+=1 %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+  
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Configattribs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Configdb</th>
+      <th>Attribute name</th>
+      <th>Monitor</th>
+      <th>Th warning</th>
+      <th>Th critical</th>
+      <th>Command</th>
+      <th>Command operand</th>
+      <th>Command operator</th>
+      <th>Command file type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @configattribs.each do |configattrib| %>
+      <tr>
+        <td><%= configattrib.configdb_id %></td>
+        <td><%= configattrib.attribute_name %></td>
+        <td><%= configattrib.monitor %></td>
+        <td><%= configattrib.th_warning %></td>
+        <td><%= configattrib.th_critical %></td>
+        <td><%= configattrib.command %></td>
+        <td><%= configattrib.command_operand %></td>
+        <td><%= configattrib.command_operator %></td>
+        <td><%= configattrib.command_file_type %></td>
+        <td><%= link_to 'Show', configattrib %></td>
+        <td><%= link_to 'Edit', edit_configattrib_path(configattrib) %></td>
+        <td><%= link_to 'Destroy', configattrib, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Configattrib', new_configattrib_path %>

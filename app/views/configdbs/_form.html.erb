@@ -1,0 +1,33 @@
+<%= form_for(@configdb) do |f| %>
+  <% if @configdb.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@configdb.errors.count, "error") %> prohibited this configdb from being saved:</h2>
+
+      <ul>
+      <% @configdb.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :location %><br>
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :monitor %><br>
+    <%= f.text_field :monitor %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
