@@ -32,6 +32,7 @@ class ConfigattribsController < ApplicationController
   # POST /configattribs.json
   def create
     @configattrib = Configattrib.new(configattrib_params)
+    @configattrib.configdb_id=session[:configdb_id]
     respond_to do |format|
       if @configattrib.save
         format.html { redirect_to @configattrib, notice: 'Configattrib was successfully created.' }

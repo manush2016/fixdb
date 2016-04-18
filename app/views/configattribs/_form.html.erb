@@ -1,4 +1,5 @@
 <%= form_for(@configattrib) do |f| %>
+    <% session[:configdb_id]=@configattrib.configdb_id %>
   <table>
     <tr><td><% f.label :configdb_id %></td><td><%  f.text_field :configdb_id %></td></tr>
     <tr><td><%= f.label :Location %></td><td><%=  @configdb.location %></td></tr>
