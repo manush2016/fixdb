@@ -18,7 +18,7 @@ class ConfigattribinclsControllerTest < ActionController::TestCase
 
   test "should create configattribincl" do
     assert_difference('Configattribincl.count') do
-      post :create, configattribincl: { configattribdetail_id: @configattribincl.configattribdetail_id, th_critical: @configattribincl.th_critical, th_warning: @configattribincl.th_warning }
+      post :create, configattribincl: { configattrib_id: @configattribincl.configattrib_id, param1: @configattribincl.param1, th_critical: @configattribincl.th_critical, th_warning: @configattribincl.th_warning }
     end
 
     assert_redirected_to configattribincl_path(assigns(:configattribincl))
@@ -35,7 +35,7 @@ class ConfigattribinclsControllerTest < ActionController::TestCase
   end
 
   test "should update configattribincl" do
-    patch :update, id: @configattribincl, configattribincl: { configattribdetail_id: @configattribincl.configattribdetail_id, th_critical: @configattribincl.th_critical, th_warning: @configattribincl.th_warning }
+    patch :update, id: @configattribincl, configattribincl: { configattrib_id: @configattribincl.configattrib_id, param1: @configattribincl.param1, th_critical: @configattribincl.th_critical, th_warning: @configattribincl.th_warning }
     assert_redirected_to configattribincl_path(assigns(:configattribincl))
   end
 

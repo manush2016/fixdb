@@ -1,29 +1,11 @@
 <%= form_for(@configattribincl) do |f| %>
-  <% if @configattribincl.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@configattribincl.errors.count, "error") %> prohibited this configattribincl from being saved:</h2>
-
-      <ul>
-      <% @configattribincl.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :configattribdetail_id %><br>
-    <%= f.text_field :configattribdetail_id %>
-  </div>
-  <div class="field">
-    <%= f.label :th_warning %><br>
-    <%= f.text_field :th_warning %>
-  </div>
-  <div class="field">
-    <%= f.label :th_critical %><br>
-    <%= f.text_field :th_critical %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <% session[:configattrib_id]=params[:configattrib_id] %>
+  <% session[:param1]=params[:param1] %>
+  <table>
+    <tr><td><% f.label :configattrib_id %></td><td><% params[:configattrib_id] %></td></tr>
+    <tr><td><%= f.label :param1 %></td><td><%= params[:param1] %></td></tr>
+    <tr><td><%= f.label :th_warning %></td><td><%= f.text_field :th_warning %></td></tr>
+    <tr><td><%= f.label :th_critical %></td><td><%= f.text_field :th_critical %></td></tr>
+    <tr><td><%= f.submit %></td></tr>
+  </table>
 <% end %>

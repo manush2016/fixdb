@@ -1,5 +1,5 @@
 class ConfigattribinclsController < ApplicationController
-  before_action :set_configattribincl, only: [:show, :edit, :update, :destroy]
+   before_action :set_configattribincl, only: [:show, :edit, :update, :destroy]
 
   # GET /configattribincls
   # GET /configattribincls.json
@@ -10,11 +10,12 @@ class ConfigattribinclsController < ApplicationController
   # GET /configattribincls/1
   # GET /configattribincls/1.json
   def show
+    redirect_to configattribs_path  
   end
 
   # GET /configattribincls/new
   def new
-    @configattribincl = Configattribincl.new
+      @configattribincl = Configattribincl.new
   end
 
   # GET /configattribincls/1/edit
@@ -25,7 +26,8 @@ class ConfigattribinclsController < ApplicationController
   # POST /configattribincls.json
   def create
     @configattribincl = Configattribincl.new(configattribincl_params)
-
+    @configattribincl.configattrib_id=session[:configattrib_id]
+    @configattribincl.param1=session[:param1]
     respond_to do |format|
       if @configattribincl.save
         format.html { redirect_to @configattribincl, notice: 'Configattribincl was successfully created.' }
@@ -69,6 +71,6 @@ class ConfigattribinclsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def configattribincl_params
-      params.require(:configattribincl).permit(:configattribdetail_id, :th_warning, :th_critical)
+      params.require(:configattribincl).permit(:configattrib_id, :param1, :th_warning, :th_critical)
     end
 end

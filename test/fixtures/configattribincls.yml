@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  configattribdetail_id: 
+  configattrib_id: 
+  param1: MyString
   th_warning: MyString
   th_critical: MyString
 
 two:
-  configattribdetail_id: 
+  configattrib_id: 
+  param1: MyString
   th_warning: MyString
   th_critical: MyString

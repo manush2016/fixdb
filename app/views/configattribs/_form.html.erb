@@ -1,6 +1,6 @@
 <%= form_for(@configattrib) do |f| %>
   <table>
-    <tr><td><%= f.label :configdb_id %></td><td><%=  f.text_field :configdb_id %></td></tr>
+    <tr><td><% f.label :configdb_id %></td><td><%  f.text_field :configdb_id %></td></tr>
     <tr><td><%= f.label :Location %></td><td><%=  @configdb.location %></td></tr>
     <tr><td><%= f.label :attribute_name %></td><td><%= f.text_field :attribute_name %></td></tr>
     <tr><td><%= f.label :monitor %></td><td><%= f.check_box :monitor, {}, 'Y', 'N' %></td></tr>

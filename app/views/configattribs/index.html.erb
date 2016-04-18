@@ -17,8 +17,16 @@
               <ul>
                 <% k=0 %>
                 <!-- Line removed and backup in file folder fixdb/backups -->
+                <li><input type="checkbox" id="node-<%= i %>-<%= j %>-<%= k %>" /><label><input type="checkbox" unchecked disabled style="display:none;"/><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><strike><%= link_to "NEW ATTRIBUTE DETAILS", new_configattribdetail_path(:id => configattrib.id) %></strike></label></li>
+                <% k+=1 %>
                 <% Configattribdetail.where("configattrib_id=?",configattrib.id).each do |configattribdetail| %>
-                <li><label><input type="checkbox" <%= (Configattribexcl.where("configattribdetail_id=?",configattribdetail.id).pluck(:excludemonitor)[0]!="Y" && configattrib.monitor=="Y")  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><%= link_to configattribdetail.param1, edit_configattribdetail_path(:id => configattribdetail.id)  %></label></li>
+                <% id=Configattribincl.where("configattrib_id=?",configattrib.id).pluck(:id)[0] %>
+                <% tcount=Configattribincl.where("configattrib_id=? and param1=?",configattrib.id,configattribdetail.param1).count %>
+                <% if tcount==0 %>
+                  <li><label><input type="checkbox" <%= (true)  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><%= link_to configattribdetail.param1, new_configattribincl_path(:configattrib_id => configattribdetail.configattrib_id, :param1 => configattribdetail.param1) %> | <strike>TH</strike>
+                <% else %>
+                  <li><label><input type="checkbox" <%= (true)  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><%= link_to configattribdetail.param1, edit_configattribincl_path(:id => id, :configattrib_id => configattribdetail.configattrib_id, :param1 => configattribdetail.param1) %> | TH
+                <% end %>
                 <% k+=1 %>
                 <% end %>
               </ul>
@@ -31,5 +39,3 @@
     <% end %>
   </ul>
 </div>
-
-  

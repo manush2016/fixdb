@@ -18,7 +18,7 @@ class ConfigattribexclsControllerTest < ActionController::TestCase
 
   test "should create configattribexcl" do
     assert_difference('Configattribexcl.count') do
-      post :create, configattribexcl: { configattribdetail_id: @configattribexcl.configattribdetail_id, excludemonitor: @configattribexcl.excludemonitor }
+      post :create, configattribexcl: { configattrib_id: @configattribexcl.configattrib_id, excludemonitor: @configattribexcl.excludemonitor, param1: @configattribexcl.param1 }
     end
 
     assert_redirected_to configattribexcl_path(assigns(:configattribexcl))
@@ -35,7 +35,7 @@ class ConfigattribexclsControllerTest < ActionController::TestCase
   end
 
   test "should update configattribexcl" do
-    patch :update, id: @configattribexcl, configattribexcl: { configattribdetail_id: @configattribexcl.configattribdetail_id, excludemonitor: @configattribexcl.excludemonitor }
+    patch :update, id: @configattribexcl, configattribexcl: { configattrib_id: @configattribexcl.configattrib_id, excludemonitor: @configattribexcl.excludemonitor, param1: @configattribexcl.param1 }
     assert_redirected_to configattribexcl_path(assigns(:configattribexcl))
   end
 

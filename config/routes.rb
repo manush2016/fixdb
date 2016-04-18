@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
   resources :configattribincls
   resources :configattribexcls
+  resources :configattribincls
+  resources :configattribexcls
   resources :configattribdetails
   resources :configattribs
   resources :configdbs
-
+  
+  get 'configattribincls/new', to: 'configattribincls#new', as: 'new_configattribincls'
+  
   root 'configattribs#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

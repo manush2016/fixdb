@@ -69,6 +69,6 @@ class ConfigattribexclsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def configattribexcl_params
-      params.require(:configattribexcl).permit(:configattribdetail_id, :excludemonitor)
+      params.require(:configattribexcl).permit(:configattrib_id, :param1, :excludemonitor)
     end
 end

@@ -1,3 +1,3 @@
 class Configattribincl < ActiveRecord::Base
-  belongs_to :configattribdetail
+  belongs_to :configattrib
 end
