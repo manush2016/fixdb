@@ -20,6 +20,7 @@ class ConfigattribinclsController < ApplicationController
 
   # GET /configattribincls/1/edit
   def edit
+    
   end
 
   # POST /configattribincls
@@ -58,7 +59,7 @@ class ConfigattribinclsController < ApplicationController
   def destroy
     @configattribincl.destroy
     respond_to do |format|
-      format.html { redirect_to configattribincls_url, notice: 'Configattribincl was successfully destroyed.' }
+      format.html { redirect_to configattribs_path, notice: 'Configattribincl Threshold is reset to default.' }
       format.json { head :no_content }
     end
   end

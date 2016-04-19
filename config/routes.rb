@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :configattribs
   resources :configdbs
   
+  delete 'configattribincls/:id/destroy', to: 'configattribincls#destroy', as: 'destroy_configattribincls'
+
   get 'configattribincls/new', to: 'configattribincls#new', as: 'new_configattribincls'
   
   root 'configattribs#index'

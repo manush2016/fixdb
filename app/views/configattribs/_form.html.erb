@@ -12,7 +12,7 @@
     <tr><td><%= f.label :command_operator %></td><td><%= f.text_field :command_operator %></td></tr>
     <tr><td><%= f.label :command_file_type %></td><td> <%= f.radio_button :command_file_type, 'DB', :checked => true %> DB
         <%= f.radio_button :command_file_type, 'OS' %> OS
-    <tr><td><%= f.submit %></td></tr>
+    <tr><td><%= f.submit "Confirm" %></td></tr>
   </table>
 <% end %>
 
