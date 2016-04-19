@@ -17,7 +17,7 @@
               <ul>
                 <% k=0 %>
                 <!-- Line removed and backup in file folder fixdb/backups -->
-                <li><input type="checkbox" id="node-<%= i %>-<%= j %>-<%= k %>" /><label><input type="checkbox" unchecked disabled style="display:none;"/><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><strike><%= link_to "NEW ATTRIBUTE DETAILS", new_configattribdetail_path(:id => configattrib.id) %></strike></label></li>
+                <li><input type="checkbox" id="node-<%= i %>-<%= j %>-<%= k %>" /><label><input type="checkbox" unchecked disabled style="display:none;"/><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><strike><%= link_to "NEW ATTRIBUTE DETAIL", new_configattribdetail_path(:id => configattrib.id) %></strike></label></li>
                 <% k+=1 %>
                 <% Configattribdetail.where("configattrib_id=?",configattrib.id).each do |configattribdetail| %>
                 <% id=Configattribincl.where("configattrib_id=?",configattrib.id).pluck(:id)[0] %>

@@ -1,19 +1,11 @@
 class ConfigattribdetailsController < ApplicationController
   before_action :set_configattribdetail, only: [:show, :edit, :update, :destroy]
-
-  # GET /configattribdetails
-  # GET /configattribdetails.json
   def index
     @configattribdetails = Configattribdetail.all
   end
-
-  # GET /configattribdetails/1
-  # GET /configattribdetails/1.json
   def show
     redirect_to configattribs_path
   end
-
-  # GET /configattribdetails/new
   def new
     @configattribdetail = Configattribdetail.new
     @configattribdetail.configattrib_id = params[:id]
@@ -31,7 +23,7 @@ class ConfigattribdetailsController < ApplicationController
   # POST /configattribdetails.json
   def create
     @configattribdetail = Configattribdetail.new(configattribdetail_params)
-
+    @configattribdetail.configattrib_id=session[:configattrib_id]
     respond_to do |format|
       if @configattribdetail.save
         format.html { redirect_to @configattribdetail, notice: 'Configattribdetail was successfully created.' }
