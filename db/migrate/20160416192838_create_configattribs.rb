@@ -13,6 +13,5 @@ class CreateConfigattribs < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :configattribs, :attribute_name, unique: true
   end
 end
