@@ -21,11 +21,31 @@ class ConfigattribexclsController < ApplicationController
   def edit
   end
 
+def tnew
+    @configattribexcl = Configattribexcl.new(configattribexcl_params)
+    @configattribexcl.id=1
+    @configattribexcl.configdb_id=params[:configdb_id]
+    @configattribexcl.configattrib_id=params[:configattrib_id]
+    @configattribexcl.param1=params[:param1]
+    @configattribexcl.excludemonitor="Y"
+    respond_to do |format|
+      if @configattribexcl.save
+        format.html { redirect_to @configattribexcl, notice: 'Configattribexcl was successfully created.' }
+        format.json { render :show, status: :created, location: @configattribexcl }
+      else
+        format.html { render :new }
+        format.json { render json: @configattribexcl.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   # POST /configattribexcls
   # POST /configattribexcls.json
   def create
     @configattribexcl = Configattribexcl.new(configattribexcl_params)
-
+    @configattribincl.configdb_id=params[:configdb_id]
+    @configattribincl.configattrib_id=params[:configattrib_id]
+    @configattribincl.param1=params[:param1]
+    @configattribincl.excludemonitor="Y"
     respond_to do |format|
       if @configattribexcl.save
         format.html { redirect_to @configattribexcl, notice: 'Configattribexcl was successfully created.' }
@@ -69,6 +89,6 @@ class ConfigattribexclsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def configattribexcl_params
-      params.require(:configattribexcl).permit(:configattrib_id, :param1, :excludemonitor)
+      params.require(:configattribexcl).permit(:configdb_id, :configattrib_id, :param1, :excludemonitor)
     end
 end

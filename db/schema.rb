@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160418142220) do
+ActiveRecord::Schema.define(version: 20160421180212) do
 
   create_table "configattribdetails", force: :cascade do |t|
     t.integer  "configattrib_id", limit: 4
@@ -21,9 +21,11 @@ ActiveRecord::Schema.define(version: 20160418142220) do
     t.string   "notified",        limit: 1
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "configdb_id",     limit: 4
   end
 
   add_index "configattribdetails", ["configattrib_id"], name: "index_configattribdetails_on_configattrib_id", using: :btree
+  add_index "configattribdetails", ["configdb_id"], name: "index_configattribdetails_on_configdb_id", using: :btree
 
   create_table "configattribexcls", force: :cascade do |t|
     t.integer  "configattrib_id", limit: 4
@@ -31,9 +33,11 @@ ActiveRecord::Schema.define(version: 20160418142220) do
     t.string   "excludemonitor",  limit: 1
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "configdb_id",     limit: 4
   end
 
   add_index "configattribexcls", ["configattrib_id"], name: "index_configattribexcls_on_configattrib_id", using: :btree
+  add_index "configattribexcls", ["configdb_id"], name: "index_configattribexcls_on_configdb_id", using: :btree
 
   create_table "configattribincls", force: :cascade do |t|
     t.integer  "configattrib_id", limit: 4
@@ -42,9 +46,11 @@ ActiveRecord::Schema.define(version: 20160418142220) do
     t.string   "th_critical",     limit: 10
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "configdb_id",     limit: 4
   end
 
   add_index "configattribincls", ["configattrib_id"], name: "index_configattribincls_on_configattrib_id", using: :btree
+  add_index "configattribincls", ["configdb_id"], name: "index_configattribincls_on_configdb_id", using: :btree
 
   create_table "configattribs", force: :cascade do |t|
     t.integer  "configdb_id",       limit: 4

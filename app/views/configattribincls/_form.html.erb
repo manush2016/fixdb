@@ -1,4 +1,5 @@
 <%= form_for(@configattribincl) do |f| %>
+  <% session[:configdb_id]=params[:configdb_id] %>
   <% session[:configattrib_id]=params[:configattrib_id] %>
   <% session[:param1]=params[:param1] %>
   <% if params[:action]=="new" %>

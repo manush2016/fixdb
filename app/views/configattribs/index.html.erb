@@ -7,13 +7,13 @@
     <li><input type="checkbox" id="node-<%= i %>" /><label><input type="checkbox" unchecked disabled=true/><span></span></label><label for="node-<%= i %>"><%= link_to "NEW DB", new_configdb_path %></label>
     <% i+=1 %>
     <% @configdbs.each do |configdb| %>
-      <li><input type="checkbox" id="node-<%= i %>" /><label><input type="checkbox" <%= (configdb.monitor=="Y")  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>"><%= link_to configdb.location.upcase, edit_configdb_path(:id => configdb.id) %></label>
+      <li><input type="checkbox" id="node-<%= i %>" /><label><input type="checkbox" <%= (configdb.monitor=="Y")  ? "checked" : "unchecked" %> disabled=true /><span></span></label><label for="node-<%= i %>"><%= link_to configdb.location.upcase, edit_configdb_path(:id => configdb.id) %></label>
         <ul>
           <% j=0 %>
-          <li><input type="checkbox" id="node-<%= i %>-<%= j %>" /><label><input type="checkbox" unchecked disabled style="display:none;"/><span></span></label><label for="node-<%= i %>-<%= j %>"><%= link_to "NEW ATTRIBUTE", new_configattrib_path(:id => configdb.id) %></label></li>
+          <li><input type="checkbox" id="node-<%= i %>-<%= j %>" /><label><input type="checkbox" unchecked disabled style="display:none;"/><span></span></label><label for="node-<%= i %>-<%= j %>"><%= link_to "USER DEFINED ATTRIBUTE", new_configattrib_path(:id => configdb.id) %></label></li>
           <% j+=1 %>
           <% Configattrib.where("configdb_id=?",configdb.id).each do |configattrib| %>
-            <li><input type="checkbox" id="node-<%= i %>-<%= j %>" /><label><input type="checkbox" <%= (configattrib.monitor=="Y")  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>-<%= j %>"><%= link_to configattrib.attribute_name, edit_configattrib_path(:id => configattrib.id) %></label>
+            <li><input type="checkbox" id="node-<%= i %>-<%= j %>" /><label><input type="checkbox" <%= (configdb.monitor=="Y" && configattrib.monitor=="Y")  ? "checked" : "unchecked" %> disabled=true /><span></span></label><label for="node-<%= i %>-<%= j %>"><%= link_to configattrib.attribute_name, edit_configattrib_path(:id => configattrib.id) %></label>
               <ul>
                 <% k=0 %>
                 <!-- Line removed and backup in file folder fixdb/backups -->
@@ -22,11 +22,16 @@
                 <% Configattribdetail.where("configattrib_id=?",configattrib.id).each do |configattribdetail| %>
                 <% id=Configattribincl.where("configattrib_id=?",configattrib.id).pluck(:id)[0] %>
                 <% tcount=Configattribincl.where("configattrib_id=? and param1=?",configattrib.id,configattribdetail.param1).count %>
-                <% if tcount==0 %>
-                  <li><label><input type="checkbox" <%= (true)  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><%= link_to configattribdetail.param1, new_configattribincl_path(:configattrib_id => configattribdetail.configattrib_id, :param1 => configattribdetail.param1) %> | <strike>TH</strike>
-                <% else %>
-                  <li><label><input type="checkbox" <%= (true)  ? "checked" : "unchecked" %> /><span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>"><%= link_to configattribdetail.param1, edit_configattribincl_path(:id => id, :configattrib_id => configattribdetail.configattrib_id, :param1 => configattribdetail.param1) %> | TH
-                <% end %>
+                <% excludemonitor=Configattribexcl.where("configattrib_id=? and param1=?",configattrib.id,configattribdetail.param1).pluck(:excludemonitor)[0] %>
+                
+
+                
+                  <li><label><input type="checkbox" <%= (configdb.monitor=="Y" && configattrib.monitor=="Y" && (excludemonitor=="N" || excludemonitor==nil))  ? "checked" : "unchecked" %> disabled=true /> <span></span></label><label for="node-<%= i %>-<%= j %>-<%= k %>">
+                  <% if tcount==0 %>  
+                    <%= link_to configattribdetail.param1, new_configattribincl_path(:configdb_id => configattribdetail.configdb_id, :configattrib_id => configattribdetail.configattrib_id, :param1 => configattribdetail.param1) %> | <strike>TH</strike>
+                  <% else %>
+                    <%= link_to configattribdetail.param1, edit_configattribincl_path(:id => id, :configattrib_id => configattribdetail.configattrib_id, :param1 => configattribdetail.param1) %> | TH
+                  <% end %>
                 <% k+=1 %>
                 <% end %>
               </ul>

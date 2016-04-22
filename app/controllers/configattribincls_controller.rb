@@ -27,6 +27,7 @@ class ConfigattribinclsController < ApplicationController
   # POST /configattribincls.json
   def create
     @configattribincl = Configattribincl.new(configattribincl_params)
+    @configattribincl.configdb_id=session[:configdb_id]
     @configattribincl.configattrib_id=session[:configattrib_id]
     @configattribincl.param1=session[:param1]
     respond_to do |format|
@@ -72,6 +73,6 @@ class ConfigattribinclsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def configattribincl_params
-      params.require(:configattribincl).permit(:configattrib_id, :param1, :th_warning, :th_critical)
+      params.require(:configattribincl).permit(:configdb_id, :configattrib_id, :param1, :th_warning, :th_critical)
     end
 end
